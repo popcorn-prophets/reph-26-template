@@ -28,7 +28,7 @@ Skip anything already installed (check versions first). Use whatever the OS prov
 4. **AWS MCP / skills**: follow https://raw.githubusercontent.com/aws/agent-toolkit-for-aws/refs/heads/main/setup-instructions/setup.md
 5. **Project**:
    ```bash
-   cp .env.example .env            # ask the user for OPENROUTER_API_KEY (or AI_* vars); never print it
+   cp .env.example .env            # ask the user for the AI API keys/vars it lists; never print them
    docker compose up -d db
    pnpm install
    pnpm db:push
