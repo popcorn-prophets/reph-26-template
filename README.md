@@ -68,6 +68,10 @@ Features are vertical slices in `src/modules/` so teammates work in parallel; se
 
 All AI calls go through `src/lib/ai.ts` (Vercel AI SDK). Switch with `AI_PROVIDER` (`openrouter` | `openai-compatible`) and `AI_MODEL` (default `openrouter/free`). Output is Zod-validated.
 
+## File ingest
+
+`parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows. Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
+
 ## Auth (optional)
 
 Self-contained Better Auth module, off by default. See `src/modules/auth/README.md`.
