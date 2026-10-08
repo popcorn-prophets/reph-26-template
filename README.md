@@ -30,3 +30,21 @@ Skills and MCP live in `.agents/` (canonical). Instructions: `AGENTS.md`. Wire t
 ```bash
 scripts/setup-agent.sh claude   # or copilot | cursor | codex | opencode | gemini | antigravity | all
 ```
+
+## Quickstart
+
+```bash
+cp .env.example .env            # add OPENROUTER_API_KEY
+docker compose up -d db         # local Postgres
+pnpm install
+pnpm db:push                    # sync schema
+pnpm dev
+```
+
+Scripts: `pnpm lint | format | typecheck | build | db:push | db:studio`.
+
+AI lives in `src/lib/ai.ts` (switch via `AI_PROVIDER`/`AI_MODEL`, default `openrouter/free`). Auth (Better Auth) is wired but optional.
+
+## Deploy
+
+EC2 + Docker: see `docs/deploy.md` and `scripts/deploy.sh`.
