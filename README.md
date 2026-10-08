@@ -89,6 +89,7 @@ Defined in `.env.example`, validated in `src/env.ts` (missing values never crash
 | `AI_MODEL`                                | Model id for the provider (default `openrouter/free`)           |
 | `OPENROUTER_API_KEY`                      | Key for `openrouter`                                            |
 | `AI_API_KEY`, `AI_BASE_URL`               | Key and endpoint for `openai-compatible`                        |
+| `AI_FALLBACK_MODEL` / `AI_TIMEOUT_MS`       | Retry model on failure; per-attempt timeout (default 30000)     |
 | `AI_EMBEDDING_MODEL`                      | Only for vector search                                          |
 | `ENABLE_AUTH`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` | Optional auth, see [`src/modules/auth/README.md`](src/modules/auth/README.md) |
 | `POSTGRES_PASSWORD`                       | Production compose only                                         |
