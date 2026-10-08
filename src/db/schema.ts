@@ -6,3 +6,4 @@ export const notes = pgTable("notes", {
   body: text("body").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+export * from "./auth-schema";
