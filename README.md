@@ -89,6 +89,7 @@ Defined in `.env.example`, validated in `src/env.ts` (missing values never crash
 | `AI_MODEL`                                | Model id for the provider (default `openrouter/free`)           |
 | `OPENROUTER_API_KEY`                      | Key for `openrouter`                                            |
 | `AI_API_KEY`, `AI_BASE_URL`               | Key and endpoint for `openai-compatible`                        |
+| `AI_FALLBACK_MODEL` / `AI_TIMEOUT_MS`       | Retry model on failure; per-attempt timeout (default 30000)     |
 | `AI_EMBEDDING_MODEL`                      | Only for vector search                                          |
 | `ENABLE_AUTH`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` | Optional auth, see [`src/modules/auth/README.md`](src/modules/auth/README.md) |
 | `POSTGRES_PASSWORD`                       | Production compose only                                         |
@@ -128,7 +129,9 @@ Features are vertical slices in `src/modules/` so three people can work in paral
 
 **AI.** All calls go through `src/lib/ai.ts`: `generateStructured()` returns Zod-validated output, `getModel()` picks the provider from env, `embedText`/`embedTexts` produce embeddings.
 
-**File ingest.** `parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows. Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
+**File ingest.** `parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows (CSV values stay strings; multi-sheet workbooks need a sheet name or `parseSheets`). Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
+
+**Scripts.** `pnpm doctor [--ai]` checks Node, db, env and optionally one tiny model call. `pnpm data:profile` prints rows, types, nulls and uniques for each file in `data/` (local only). `pnpm db:reset` wipes the local db and re-pushes the schema.
 
 **Vector search (optional).** The db image is pgvector and `docker/init-pgvector.sql` enables the extension on first start (existing volume or RDS: run `CREATE EXTENSION IF NOT EXISTS vector;` once). Set `AI_EMBEDDING_MODEL`, store embeddings in a `vector("embedding", { dimensions: N })` column, and query:
 

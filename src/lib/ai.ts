@@ -13,8 +13,7 @@ import type { z } from "zod";
 import { env } from "@/env";
 
 /** Provider is switched by AI_PROVIDER / AI_MODEL. All AI calls go through this module. */
-export function getModel(): LanguageModel {
-  const id = env.AI_MODEL;
+export function getModel(id: string = env.AI_MODEL): LanguageModel {
   switch (env.AI_PROVIDER) {
     case "openai-compatible":
       return createOpenAICompatible({
@@ -27,19 +26,33 @@ export function getModel(): LanguageModel {
   }
 }
 
-/** Zod-validated structured output. */
+/**
+ * Zod-validated structured output. Each attempt is capped at AI_TIMEOUT_MS; on failure it
+ * retries once with AI_FALLBACK_MODEL (if set) so one slow or bad call doesn't kill a demo.
+ */
 export async function generateStructured<T extends z.ZodType>(
   schema: T,
   prompt: string,
   system?: string,
 ): Promise<z.infer<T>> {
-  const { output } = await generateText({
-    model: getModel(),
-    system,
-    prompt,
-    output: Output.object({ schema }),
-  });
-  return output as z.infer<T>;
+  const ids = [env.AI_MODEL, env.AI_FALLBACK_MODEL].filter((id): id is string => !!id);
+  let lastError: unknown;
+  for (const id of ids) {
+    try {
+      const { output } = await generateText({
+        model: getModel(id),
+        system,
+        prompt,
+        output: Output.object({ schema }),
+        abortSignal: AbortSignal.timeout(env.AI_TIMEOUT_MS),
+      });
+      return output as z.infer<T>;
+    } catch (err) {
+      lastError = err;
+      console.warn(`[ai] ${id} failed:`, err instanceof Error ? err.message : err);
+    }
+  }
+  throw lastError;
 }
 
 function getEmbeddingModel(): EmbeddingModel {
