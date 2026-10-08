@@ -68,6 +68,14 @@ Features are vertical slices in `src/modules/` so teammates work in parallel; se
 
 All AI calls go through `src/lib/ai.ts` (Vercel AI SDK). Switch with `AI_PROVIDER` (`openrouter` | `openai-compatible`) and `AI_MODEL` (default `openrouter/free`). Output is Zod-validated.
 
+## Vector search (optional)
+
+The db image is pgvector and `docker/init-pgvector.sql` enables the extension on first start (existing volume or RDS: run `CREATE EXTENSION IF NOT EXISTS vector;` once). Embed with `embedText`/`embedTexts` from `@/lib/ai` (set `AI_EMBEDDING_MODEL`), store in a Drizzle `vector("embedding", { dimensions: N })` column, and query with `cosineDistance` from `drizzle-orm`:
+
+```ts
+db.select().from(docs).orderBy(cosineDistance(docs.embedding, await embedText(q))).limit(5);
+```
+
 ## File ingest
 
 `parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows. Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
