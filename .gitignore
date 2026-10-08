@@ -4,3 +4,12 @@
 data/*
 !data/.gitkeep
 *.log
+.claude/
+.cursor/
+.vscode/mcp.json
+.mcp.json
+.github/skills
+.opencode/
+opencode.json
+.gemini/
+.agent/
