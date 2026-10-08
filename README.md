@@ -22,3 +22,11 @@
 | Linting          | ESLint                                                                                   |
 | Version control  | GitHub                                                                                   |
 | CI/CD            | GitHub Actions (optional; minimal lint + build check on PRs; Vercel for preview deploys) |
+
+## Agent setup
+
+Skills and MCP live in `.agents/` (canonical). Instructions: `AGENTS.md`. Wire them to your agent:
+
+```bash
+scripts/setup-agent.sh claude   # or copilot | cursor | codex | opencode | gemini | antigravity | all
+```
