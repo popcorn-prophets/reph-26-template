@@ -6,4 +6,6 @@ export const notes = pgTable("notes", {
   body: text("body").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-export * from "./auth-schema";
+
+// Auth tables (opt-in): uncomment to include them in `pnpm db:push`. See src/modules/auth/README.md
+// export * from "@/modules/auth/schema";
