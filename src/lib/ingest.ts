@@ -14,7 +14,6 @@ export async function parseTable(file: File): Promise<Row[]> {
   const { data } = Papa.parse<Row>(await file.text(), {
     header: true,
     skipEmptyLines: true,
-    dynamicTyping: true,
     transformHeader: (h) => h.trim(),
   });
   return data;
