@@ -34,7 +34,7 @@ Next.js + TypeScript, Tailwind + shadcn/ui, Recharts, Server Actions/Route Handl
 - Shared files (`src/db`, `src/lib/ai.ts`, `src/env.ts`, `package.json`): own small PR, merge immediately.
 - Stay in your issue's scope. New work becomes a new issue, not a bigger PR. No drive-by refactors.
 - Blocked on a teammate: stub against the agreed Zod shape (disclose it, remove before freeze).
-- Review: someone other than the author. Block only on a broken flow, contract mismatch, rule violation or leak. Else follow-up issue. Reviewer squash-merges when CI is green.
+- Review: someone other than the author. Block only on a broken flow, contract mismatch, rule violation or leak. Else follow-up issue. Reviewer merges with a regular merge commit (`gh pr merge --merge`, no squash or rebase) when CI is green.
 
 ## Conventions
 
