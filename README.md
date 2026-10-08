@@ -128,7 +128,7 @@ Features are vertical slices in `src/modules/` so three people can work in paral
 
 **AI.** All calls go through `src/lib/ai.ts`: `generateStructured()` returns Zod-validated output, `getModel()` picks the provider from env, `embedText`/`embedTexts` produce embeddings.
 
-**File ingest.** `parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows. Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
+**File ingest.** `parseTable(file)` in `src/lib/ingest.ts` turns an uploaded `.csv`/`.xlsx` into rows (CSV values stay strings; multi-sheet workbooks need a sheet name or `parseSheets`). Pair it with `<FileUpload action={...} />` and a Server Action that reads `formData.get("file")`.
 
 **Vector search (optional).** The db image is pgvector and `docker/init-pgvector.sql` enables the extension on first start (existing volume or RDS: run `CREATE EXTENSION IF NOT EXISTS vector;` once). Set `AI_EMBEDDING_MODEL`, store embeddings in a `vector("embedding", { dimensions: N })` column, and query:
 
