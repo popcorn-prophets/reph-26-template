@@ -41,9 +41,36 @@ pnpm db:push                    # sync schema
 pnpm dev
 ```
 
-Scripts: `pnpm lint | format | typecheck | build | db:push | db:studio`.
+## Scripts
 
-Code is organized as vertical slices in `src/modules/` (see its README). AI lives in `src/lib/ai.ts` (switch via `AI_PROVIDER`/`AI_MODEL`, default `openrouter/free`). Auth is an optional module: `src/modules/auth/README.md`.
+| Command                                       | Purpose                       |
+| --------------------------------------------- | ----------------------------- |
+| `pnpm dev` / `build` / `start`                | Run, build, serve             |
+| `pnpm lint` / `format` / `typecheck`          | Checks (run lint + build before pushing) |
+| `pnpm db:push` / `db:generate` / `db:studio`  | Drizzle schema sync, migrations, GUI |
+| `pnpm auth:generate`                          | Regenerate auth schema after changing plugins |
+
+## Project structure
+
+```
+src/
+  app/          routes (thin pages, API routes)
+  modules/      one folder per feature: schema, actions, ai, components
+  components/ui shadcn/ui
+  lib/          shared helpers (ai.ts, utils)
+  db/           Drizzle client
+  env.ts        Zod-validated env
+```
+
+Features are vertical slices in `src/modules/` so teammates work in parallel; see `src/modules/README.md`.
+
+## AI
+
+All AI calls go through `src/lib/ai.ts` (Vercel AI SDK). Switch with `AI_PROVIDER` (`openrouter` | `openai-compatible`) and `AI_MODEL` (default `openrouter/free`). Output is Zod-validated.
+
+## Auth (optional)
+
+Self-contained Better Auth module, off by default. See `src/modules/auth/README.md`.
 
 ## Deploy
 
