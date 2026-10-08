@@ -6,7 +6,7 @@ Fill in as you build. Required for submission (mechanics §9, §11).
 - (e.g. GitHub Copilot, Claude Code, Codex) + skills/MCP in `.agents/`
 
 ## AI models / APIs
--
+- Vercel AI SDK via OpenRouter (`openrouter/free`; provider/model switchable by env). Confirm approval with REPH.
 
 ## Mock, simulated or manual parts
 -
@@ -15,7 +15,7 @@ Fill in as you build. Required for submission (mechanics §9, §11).
 -
 
 ## External services & reusable components
--
+- Next.js, shadcn/ui (+ AI Elements and Kibo UI registry components), Drizzle, Better Auth (optional), PostgreSQL, AWS EC2 + Docker
 
 ## Known gaps / controls needed for a pilot
 -

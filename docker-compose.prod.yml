@@ -1,0 +1,39 @@
+# Single-host deploy (EC2). Run: docker compose -f docker-compose.prod.yml up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://app:${POSTGRES_PASSWORD:-app}@db:5432/app
+    ports:
+      - "80:3000"
+    depends_on:
+      - db
+
+  # One-off schema push: docker compose -f docker-compose.prod.yml run --rm migrate
+  migrate:
+    build:
+      context: .
+      target: build
+    profiles: [tools]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://app:${POSTGRES_PASSWORD:-app}@db:5432/app
+    command: pnpm db:push --force
+    depends_on:
+      - db
+
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-pgvector.sql:/docker-entrypoint-initdb.d/init-pgvector.sql:ro
+
+volumes:
+  pgdata:
