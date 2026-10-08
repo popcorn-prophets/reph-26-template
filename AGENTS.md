@@ -47,3 +47,9 @@ Next.js + TypeScript, Tailwind + shadcn/ui, Recharts, Server Actions/Route Handl
 3. `to-tickets`: split into parallel GitHub issues, assigned per teammate.
 4. Each person: `implement-spec` on their issue, then branch and PR.
 5. Verify with `webapp-testing`; `diagnosing-bugs` when stuck; `handoff` when switching agents.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in GitHub Issues via the `gh` CLI. See `docs/agents/issue-tracker.md`.
