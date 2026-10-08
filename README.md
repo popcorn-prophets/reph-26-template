@@ -25,6 +25,8 @@
 
 ## Agent setup
 
+Fresh laptop: paste the prompt from `docs/setup.md` into your agent.
+
 Skills and MCP live in `.agents/` (canonical). Instructions: `AGENTS.md`. Wire them to your agent:
 
 ```bash
