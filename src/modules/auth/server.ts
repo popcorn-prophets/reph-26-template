@@ -3,7 +3,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { db } from "@/db";
-import * as schema from "./schema";
+import * as schema from "./auth-schema";
 
 // Reads BETTER_AUTH_SECRET and BETTER_AUTH_URL from env automatically.
 // Add plugins/social providers here, then re-run `pnpm auth:generate`.

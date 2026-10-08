@@ -1,4 +1,4 @@
-import { AnalyzeForm } from "@/components/analyze-form";
+import { AnalyzeForm } from "@/modules/demo/components/analyze-form";
 
 export default function Home() {
   return (

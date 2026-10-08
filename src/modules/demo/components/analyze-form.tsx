@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { analyze, type AnalyzeResult } from "@/server/actions/analyze";
+import { analyze, type AnalyzeResult } from "../actions";
 
 export function AnalyzeForm() {
   const [text, setText] = useState("");

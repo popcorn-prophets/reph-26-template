@@ -43,7 +43,7 @@ pnpm dev
 
 Scripts: `pnpm lint | format | typecheck | build | db:push | db:studio`.
 
-AI lives in `src/lib/ai.ts` (switch via `AI_PROVIDER`/`AI_MODEL`, default `openrouter/free`). Auth is an optional module: `src/modules/auth/README.md`.
+Code is organized as vertical slices in `src/modules/` (see its README). AI lives in `src/lib/ai.ts` (switch via `AI_PROVIDER`/`AI_MODEL`, default `openrouter/free`). Auth is an optional module: `src/modules/auth/README.md`.
 
 ## Deploy
 
