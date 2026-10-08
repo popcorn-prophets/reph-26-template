@@ -1,6 +1,4 @@
 import "server-only";
-import { createAnthropic } from "@ai-sdk/anthropic";
-import { createOpenAI } from "@ai-sdk/openai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { generateText, Output, type LanguageModel } from "ai";
@@ -11,15 +9,11 @@ import { env } from "@/env";
 export function getModel(): LanguageModel {
   const id = env.AI_MODEL;
   switch (env.AI_PROVIDER) {
-    case "anthropic":
-      return createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(id);
-    case "openai":
-      return createOpenAI({ apiKey: env.OPENAI_API_KEY })(id);
     case "openai-compatible":
       return createOpenAICompatible({
         name: "custom",
         baseURL: env.AI_BASE_URL ?? "",
-        apiKey: env.OPENAI_API_KEY,
+        apiKey: env.AI_API_KEY,
       }).chatModel(id);
     default:
       return createOpenRouter({ apiKey: env.OPENROUTER_API_KEY }).chat(id);
