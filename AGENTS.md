@@ -1,6 +1,6 @@
 # AGENTS.md
 
-REPH AI Summit 2026 Academe Hackathon. Onsite 5h build sprint, live demo judged. Rules: `docs/mechanics.md`.
+REPH AI Summit 2026 Academe Hackathon. Onsite 5h build sprint, live demo judged. Rules: `docs/mechanics.md`. Company background (RELX/REPH): `docs/relx-reph.md`.
 
 ## Priorities (judging weights)
 
